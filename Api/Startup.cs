@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using MediatR;
+using Application.Books;
 using Persistance;
 using Microsoft.EntityFrameworkCore;
 namespace Api
@@ -34,6 +36,7 @@ namespace Api
             });
 
             services.AddCors(config => config.AddDefaultPolicy(c => c.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
+            services.AddMediatR(typeof(List.Handler).Assembly);
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
