@@ -23,11 +23,11 @@ namespace Api
                 try{
                     var context = services.GetRequiredService<DataContext>();
                     context.Database.Migrate();
-                    Seed.SeedData(context);
+                    // Seed.SeedData(context);
                 }
                 catch (Exception ex) {
                     var logger = services.GetRequiredService<ILogger<Program>>();
-                    logger.LogError(ex, "Error occured");
+                    logger.LogError(ex, "Error occured during migration");
                 }
             } 
 

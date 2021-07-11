@@ -7,7 +7,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.MuiToolbar-root.MuiToolbar-regular.MuiToolbar-gutters {
+  background-color: linear-gradient(
+    135deg,
+    rgb(24, 42, 115) 0%,
+    rgb(33, 138, 174) 69%,
+    rgb(32, 167, 172) 89%
+  ) 
 }
