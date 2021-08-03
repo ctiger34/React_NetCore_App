@@ -2,7 +2,7 @@
 
 namespace Persistance.Migrations
 {
-    public partial class addedCommentSchema2 : Migration
+    public partial class editedcommentschema3 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
