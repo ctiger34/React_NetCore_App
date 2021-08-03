@@ -1,7 +1,5 @@
 import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
-// import Button from '@material-ui/core/Button';
-import CameraIcon from '@material-ui/icons/PhotoCamera';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -11,11 +9,7 @@ import Grid from '@material-ui/core/Grid';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-// import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
 import {Segment,Icon, Menu,Button,Container, Label} from 'semantic-ui-react'
-import moment from "moment";
-import { BookDetails } from './BookDetails';
 
 
 
@@ -23,18 +17,6 @@ import { BookDetails } from './BookDetails';
 
 //Component STYLE
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
 
 
 const useStyles = makeStyles((theme) => ({
@@ -69,7 +51,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 
 
@@ -77,7 +58,7 @@ const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 /// Component FUNCTION
 
-export default function Album({book, selectBook}) {
+export default function Album({book, selectBook, commentBoxMode}) {
   const classes = useStyles();
 
   
@@ -102,8 +83,8 @@ export default function Album({book, selectBook}) {
       <main>
         {/* Hero unit */}
         <div className={classes.heroContent}>
-          <Container maxWidth="sm">
-            <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
+          <Container maxwidth="sm">
+            <Typography component="h1" variant="h2" align="center" primary gutterBottom>
               Album layout
             </Typography>
             <Typography variant="h5" align="center" color="textSecondary" paragraph>
@@ -114,12 +95,12 @@ export default function Album({book, selectBook}) {
             <div className={classes.heroButtons}>
               <Grid container spacing={2} justify="center">
                 <Grid item>
-                  <Button variant="contained" color="primary">
+                  <Button variant="contained" primary>
                     Main call to action
                   </Button>
                 </Grid>
                 <Grid item>
-                  <Button variant="outlined" color="primary">
+                  <Button variant="outlined" primary>
                     Secondary action
                   </Button>
                 </Grid>
@@ -127,7 +108,7 @@ export default function Album({book, selectBook}) {
             </div>
           </Container>
         </div>
-        <Container className={classes.cardGrid} maxWidth="md">
+        <Container className={classes.cardGrid} maxwidth="md">
           {/* End hero unit */}
 
 
@@ -160,13 +141,15 @@ export default function Album({book, selectBook}) {
                   <Segment >
 
                   <CardActions >
-                  <Button  onClick={() => {
+                  <Button floated="right" 
+                  onClick={() => {
                     selectBook(b.id)
+                    commentBoxMode(false)
                   }}
-                    size="small" color="primary">
+                    size="small" primary>
                       <b>  View </b>
                     </Button>
-                    <Button  size="small" color="primary">
+                    <Button floated="right" size="small" primary>
                       <b> Comment </b>
                     </Button>
                   </CardActions>
@@ -182,19 +165,7 @@ export default function Album({book, selectBook}) {
 
 
 
-                          {/* Footer */}
-
-
-      <footer className={classes.footer}>
-        <Typography variant="h6" align="center" gutterBottom>
-          Footer
-        </Typography>
-        <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-          Something here to give the footer a purpose!
-        </Typography>
-        <Copyright />
-      </footer>
-      {/* End footer */}
+       
     </React.Fragment>
   );
 }

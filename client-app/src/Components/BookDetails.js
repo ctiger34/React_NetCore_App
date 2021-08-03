@@ -1,12 +1,20 @@
 import moment from 'moment'
-import React from 'react'
-import { Icon, Card, Button, Label} from 'semantic-ui-react'
+import { Icon, Card, Button} from 'semantic-ui-react'
 
-export const BookDetails = ({book}) => {
-    return (
+export const BookDetails = ({book, cancel, SBC, commentBox, selectedBookId}) => {
+
+
+
+  
+  
+
+  return (
         <div>
             <Card>
+           <Button onClick={cancel}>   <Icon name="close" /> </Button> 
+           <br />
                 <Icon name="book" size="massive" />
+                
     <Card.Content>
       <Card.Header> {book.title} </Card.Header>
       <Card.Meta>
@@ -23,10 +31,16 @@ export const BookDetails = ({book}) => {
     <Card.Content extra>
       <Button.Group widths={2}>
           <Button color="blue" content="Read" />
-          <Button color="green" content="Leave a Comment" />
+          <Button color="green" content="Leave a Comment" 
+          onClick={() => {
+            commentBox(true)
+            SBC(book.id)
+            selectedBookId(book.id)
+            }} />
       </Button.Group>
     </Card.Content>
   </Card>
         </div>
     )
 }
+
