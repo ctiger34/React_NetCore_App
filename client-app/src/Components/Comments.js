@@ -1,7 +1,9 @@
-import React , {useState, useEffect} from 'react'
+import React , {useState} from 'react'
 import moment from 'moment'
 import { Segment, Input, Grid, Comment, Icon, Form, Button } from 'semantic-ui-react'
 import Agent from '../Api/Agent';
+import CommentStore from '../Stores/commentStore';
+import { observer } from 'mobx-react-lite';
 
 
 
@@ -10,18 +12,19 @@ import Agent from '../Api/Agent';
 
 
 
-export const Comments = ({comment,selectedBookId}) => {
+const Comments = () => {
 
 
 
   const [comments, setComments] = useState([])
   const [newCom, setNewCom] = useState()
-  
+
+  const cmments = [CommentStore.selectedComment]
 
   
-  useEffect( ( )=> {
-    setComments([comment])
-  },[comment]) 
+
+
+
   
 
 
@@ -43,7 +46,7 @@ export const Comments = ({comment,selectedBookId}) => {
     const crrdate = new Date();
     // const currentDate = crrdate.toString("yyy'-'MM'-'DD'T'HH':'mm");
     const currentDate = moment(crrdate).format("yyy-MM-DDTHH:mm:ss")
-    setNewCom({...newCom ,[name]: value, bookId: (selectedBookId),  time:currentDate});
+    setNewCom({...newCom ,[name]: value, bookId: (CommentStore.selectedBookId),  time:currentDate});
     console.log(newCom);
   }
 
@@ -51,13 +54,14 @@ export const Comments = ({comment,selectedBookId}) => {
         <Segment>
         <Segment>
           {
-          comments.map((c) => ( 
+          cmments.map((m) => ( 
+            m.map((l) => (
             
-            c.map((l)=> (
+            
               <Comment.Group>
           <Comment key={l.id}>
           <Comment.Avatar src="/Assest/commentAvatar.jpg" >  <Icon name="user"  size="tiny" /> </Comment.Avatar>
-                <Comment.Content>
+                <Comment.Content key={l.id}>
                   <Comment.Author>{l.userName}</Comment.Author>
                   <Comment.Metadata>
                     <div> {moment(l.time).format("hh:mm, D.M.Y")} </div>
@@ -71,10 +75,10 @@ export const Comments = ({comment,selectedBookId}) => {
                 </Comment.Content>
               </Comment>
               </Comment.Group>
-            ))
+            )
           
 
-          ))}
+          )))}
 
         </Segment>
 
@@ -111,3 +115,5 @@ export const Comments = ({comment,selectedBookId}) => {
        
     )
 }
+
+export default observer(Comments);

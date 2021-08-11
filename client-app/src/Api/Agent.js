@@ -28,9 +28,9 @@ const Comments = {
     delete : (id) => requests.del(`/comments/${id}`)
 }
 
-
-
-export default {
+const exported ={
     Books,
     Comments
-}
+};
+
+export default exported;

@@ -1,17 +1,26 @@
+import { observer } from 'mobx-react-lite'
 import moment from 'moment'
 import { Icon, Card, Button} from 'semantic-ui-react'
+import BooksStore from '../Stores/booksStore'
+import CommentStore from '../Stores/commentStore'
 
-export const BookDetails = ({book, cancel, SBC, commentBox, selectedBookId}) => {
+
+const BookDetails = () => {
 
 
 
-  
+  const book = BooksStore.selectedBook
+  const close = () => {
+    BooksStore.closeBook();
+    CommentStore.closeCommentBox();
+  } 
   
 
   return (
         <div>
             <Card>
-           <Button onClick={cancel}>   <Icon name="close" /> </Button> 
+           <Button onClick={close}>
+            <Icon name="close" /> </Button> 
            <br />
                 <Icon name="book" size="massive" />
                 
@@ -33,9 +42,8 @@ export const BookDetails = ({book, cancel, SBC, commentBox, selectedBookId}) => 
           <Button color="blue" content="Read" />
           <Button color="green" content="Leave a Comment" 
           onClick={() => {
-            commentBox(true)
-            SBC(book.id)
-            selectedBookId(book.id)
+            CommentStore.selectBookId(book.id);
+            CommentStore.openCommentBox();
             }} />
       </Button.Group>
     </Card.Content>
@@ -43,4 +51,6 @@ export const BookDetails = ({book, cancel, SBC, commentBox, selectedBookId}) => 
         </div>
     )
 }
+
+export default observer(BookDetails);
 

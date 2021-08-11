@@ -10,6 +10,9 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import {Segment,Icon, Menu,Button,Container, Label} from 'semantic-ui-react'
+import { observer } from 'mobx-react-lite';
+import BooksStore from '../Stores/booksStore';
+import CommentStore from '../Stores/commentStore';
 
 
 
@@ -58,9 +61,9 @@ const useStyles = makeStyles((theme) => ({
 
 /// Component FUNCTION
 
-export default function Album({book, selectBook, commentBoxMode}) {
+const Album = () => {
   const classes = useStyles();
-
+  const book = BooksStore.book;
   
 
   return (
@@ -117,7 +120,7 @@ export default function Album({book, selectBook, commentBoxMode}) {
 
           <Grid container spacing={4}>
             {book.map((b) => (
-              <Grid item key={b.Id} xs={12} sm={6} md={4}>
+              <Grid item key={b.id} xs={12} sm={6} md={4}>
                 <Card className={classes.card}>
                   <CardMedia
                     className={classes.cardMedia}
@@ -143,8 +146,9 @@ export default function Album({book, selectBook, commentBoxMode}) {
                   <CardActions >
                   <Button floated="right" 
                   onClick={() => {
-                    selectBook(b.id)
-                    commentBoxMode(false)
+                    BooksStore.selectBook(b.id)
+                    CommentStore.selectBookId(b.id)
+                    CommentStore.closeCommentBox()
                   }}
                     size="small" primary>
                       <b>  View </b>
@@ -169,3 +173,5 @@ export default function Album({book, selectBook, commentBoxMode}) {
     </React.Fragment>
   );
 }
+
+export default observer(Album);

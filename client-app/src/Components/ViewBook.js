@@ -1,27 +1,29 @@
-import React , { useState} from 'react'
+import { observer } from 'mobx-react-lite'
 import { Segment } from 'semantic-ui-react'
-import { BookDetails } from './BookDetails'
-import { Comments } from './Comments'
+import BooksStore from '../Stores/booksStore'
+import CommentStore from '../Stores/commentStore'
+import BookDetails  from './BookDetails'
+import Comments  from './Comments'
 
 
 
-export const ViewBook = ({selectedBook, commentBox, cancel, comment, commentBoxMode}) => {
+const ViewBook = () => {
 
     
     
 
-    const [commentMode, setCommentMode] = useState(false)
-    const [bookID, setBookId] = useState()
-    const [selectedComment, setSelectedComment] = useState()
+    // const [commentMode, setCommentMode] = useState(false)
+    // const [bookID, setBookId] = useState()
+    // const [selectedComment, setSelectedComment] = useState()
 
-    const handleBookId = (id) => {
-        setBookId(id);
-    }
+    // const handleBookId = (id) => {
+    //     setBookId(id);
+    // }
 
-    const handleSelectedBookComments = (id) => 
-    {
-        setSelectedComment(comment.filter(a => a.bookId === id))    
-    }
+    // const handleSelectedBookComments = (id) => 
+    // {
+    //     setSelectedComment(comment.filter(a => a.bookId === id))    
+    // }
 
 
     
@@ -33,25 +35,19 @@ export const ViewBook = ({selectedBook, commentBox, cancel, comment, commentBoxM
     return (
         <div>
             <Segment>
-                {selectedBook && 
-                ( <BookDetails  
-                cancel={cancel} 
-                book={selectedBook} 
-                commentBox={setCommentMode}
-                SBC={handleSelectedBookComments}
-                selectedBookId={handleBookId}
-                /> )}
+                {   
+                BooksStore.viewMode && 
+                    <BookDetails/> 
+                }
                 
             </Segment>
             <Segment>
-                {commentMode &&
-                <Comments
-                comment={selectedComment}
-                selectedBookId={bookID}
-                commentBoxMode={setCommentMode}
-                 />}
+                {CommentStore.viewMode &&
+                <Comments />}
                 
             </Segment>
         </div>
     )
 }
+
+export default observer(ViewBook);
