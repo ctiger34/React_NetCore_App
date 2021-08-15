@@ -1,18 +1,44 @@
-import './App.css';
-import { Values } from './Components/Values';
-import {Test} from './Components/Test'
+import React , {  useEffect  } from 'react';
+import Album from './Components/Album';
+import ViewBook  from './Components/ViewBook';
+import { Footer } from './Components/Footer';
+import { observer } from 'mobx-react-lite';
+import BooksStore from './Stores/booksStore';
+import CommentStore from './Stores/commentStore';
 
-function App() {
+
+
+
+
+
+
+const App =  () => {
+
+
+
+
+
+      useEffect( ( )=> {
+        BooksStore.loadBook()
+        CommentStore.loadComments()
+      },[]) 
+
+    
   return (
-    < div>
-         <br />
-        <Values />
-        <br />
-        <Test />
+    <div>
+
+        <Album />
+
+        <ViewBook />
+
+        <Footer />
+        
+
+        
       
       
     </div>
   );
 }
 
-export default App;
+export default observer(App);

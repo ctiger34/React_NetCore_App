@@ -27,7 +27,7 @@ namespace Api
                 }
                 catch (Exception ex) {
                     var logger = services.GetRequiredService<ILogger<Program>>();
-                    logger.LogError(ex, "Error occured");
+                    logger.LogError(ex, "Error occured during migration");
                 }
             } 
 

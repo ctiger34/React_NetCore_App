@@ -11,16 +11,10 @@ namespace Persistance
     
         public DbSet<Value> Values { get; set; }
         public DbSet<Book> Books {get; set;}
+        
+        public DbSet<Comment> Comments {get; set;}
 
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            builder.Entity<Value>()
-                .HasData(
-                    new Value {Id = 1, Name = "name1"},
-                    new Value {Id = 2, Name = "name2"},
-                    new Value {Id = 3, Name = "name3"}
-                );
-        }
+        
     }
 
 }
