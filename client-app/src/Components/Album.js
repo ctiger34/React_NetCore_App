@@ -87,7 +87,7 @@ const Album = () => {
         {/* Hero unit */}
         <div className={classes.heroContent}>
           <Container maxwidth="sm">
-            <Typography component="h1" variant="h2" align="center" primary gutterBottom>
+            <Typography component="h1" variant="h2" align="center" primary="true" gutterBottom>
               Album layout
             </Typography>
             <Typography variant="h5" align="center" color="textSecondary" paragraph>

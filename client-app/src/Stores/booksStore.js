@@ -15,11 +15,12 @@ class BookStoreImp{
 
 
     //ACTION
-    loadBook = async () => {
-        Agent.Books.list()
+    loadBook = () => {
+       Agent.Books.list()
         .then( res => {
             this.book = res;
         })
+        .catch(err => console.log(err));
     };
 
     selectBook = (id) => {

@@ -1,9 +1,11 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 import Agent from "../Api/Agent";
 
 class commentStoreImp{
     comment = [];
     selectedComment =[];
+    deletedComment;
+    selectedCommentId;
     selectedBookId;
     viewMode = false;
 
@@ -11,10 +13,11 @@ class commentStoreImp{
         makeAutoObservable(this);
     }
 
-    loadComments = () => {
-        Agent.Comments.list().then( res => {
+    loadComments = async () => {
+        await Agent.Comments.list().then( res => {
             this.comment = res;
         })
+        .catch(err => console.log(err));
     }
 
     selectBookId = (bookid) => {
@@ -29,6 +32,35 @@ class commentStoreImp{
     closeCommentBox = () => {
         this.viewMode = false;
     }
+
+    addComment = async(com) => {
+      try {
+        await Agent.Comments.create(com);
+       runInAction(()=>{
+        this.comment.push(com);
+        this.selectBookId(this.selectedBookId);
+       })
+        
+      }
+      catch(err){
+          console.log(err);
+      }
+        
+    } 
+
+    deleteComment = async(id)=> {
+        try {
+        await Agent.Comments.delete(id);
+        runInAction=(()=>{
+        this.selectedComment = this.selectedComment.filter(a=> a.id !== id)
+        })
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
+        
+    
 }
 
 const CommentStore = new commentStoreImp()
