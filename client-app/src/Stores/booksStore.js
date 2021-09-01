@@ -5,9 +5,11 @@ import Agent from "../Api/Agent";
 class BookStoreImp{
     
     //OBSERVABLE
+    books = [];
     book = [];
     selectedBook=[];
     viewMode = false;
+    bookModal = false;
 
     constructor(){
         makeAutoObservable(this);
@@ -15,21 +17,36 @@ class BookStoreImp{
 
 
     //ACTION
-    loadBook = () => {
+    loadBooks = () => {
        Agent.Books.list()
         .then( res => {
-            this.book = res;
+            this.books = res;
         })
         .catch(err => console.log(err));
     };
 
+    loadBook = (id) => {
+        Agent.Books.details(id)
+         .then( res => {
+             this.book = res;
+         })
+         .catch(err => console.log(err));
+     };
+
     selectBook = (id) => {
-        this.selectedBook = this.book.find(a => a.id === id);
-        this.viewMode = true;
+        this.selectedBook = this.books.find(a => a.id === id);
     }
 
     closeBook = () => {
         this.viewMode = false;
+    }
+
+    openModal = () => {
+        this.bookModal = true;
+    }
+
+    closeModal = () => {
+        this.bookModal = false;
     }
 
 

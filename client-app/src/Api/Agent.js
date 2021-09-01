@@ -27,10 +27,18 @@ const Comments = {
     update : (comment) => requests.put(`/comments/${comment.id}`, comment),
     delete : (id) => requests.del(`/comments/${id}`)
 }
+const Reviews = {
+    list : () => requests.get("/review"),
+    details : (id) => requests.get(`/review/${id}`),
+    create : (comment) => requests.post('/review', comment),
+    update : (comment) => requests.put(`/review/${comment.id}`, comment),
+    delete : (id) => requests.del(`/review/${id}`)
+}
 
 const exported ={
     Books,
-    Comments
+    Comments,
+    Reviews
 };
 
 export default exported;

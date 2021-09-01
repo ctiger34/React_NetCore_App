@@ -46,14 +46,14 @@ const Comments = observer(() => {
 
 
     return (
-        <Segment>
-        <Segment>
+        <Segment style={{border: "3px outset", padding:"10px"}}>
+        <Segment >
           {
           CommentStore.selectedComment.map((l) => ( 
               
-              <Comment.Group key={l.userName}>
+              <Comment.Group key={l.userName}  >
          
-                <Comment>
+                <Comment style={{width:"170%"}}>
 
                   <Comment.Avatar src={img} >  <Icon name="user"  size="tiny"  /> </Comment.Avatar>
                     
@@ -83,7 +83,9 @@ const Comments = observer(() => {
                     </Comment.Content>
                     
                 </Comment>
+                <hr/>
               </Comment.Group>
+              
             
           
 
@@ -96,7 +98,7 @@ const Comments = observer(() => {
           <Comment.Group>
           
           
-          <Form id="frm" reply style={{border: "1px solid black", borderRadius:"5px" ,padding:"5px"}}>
+          <Form id="frm" reply style={{border: "1px solid black", borderRadius:"5px" ,padding:"7px" ,width:"200%"}}>
           
           <Form.Field inline>
             <label> Name</label>
