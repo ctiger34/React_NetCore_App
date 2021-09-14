@@ -16,7 +16,7 @@ const BookDashboard =({post}) => {
 
   useEffect(()=>{
     BooksStore.loadBook(post)
-  },[BooksStore.loadBook])
+  },[post])
 
 
   return (

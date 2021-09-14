@@ -28,7 +28,7 @@ const OpenBook= ({match}) => {
     BooksStore.loadBook(match.params.id)
     reviewStore.selectBook(match.params.id)
     CommentStore.selectBookId(match.params.id)
-  },[reviewStore.reviews])
+  },[match.params.id])
 
   const reviews = reviewStore.selectedBookReviews
     
@@ -58,7 +58,7 @@ const OpenBook= ({match}) => {
         <div style={{border:"3px outset ", padding:"10px"}}>
           <Grid container spacing={3}>
             {featuredPosts.map((r) => (
-              <Reviews review={r} />
+              <Reviews review={r} key={r.id} />
             ))}
           </Grid>
         </div>
